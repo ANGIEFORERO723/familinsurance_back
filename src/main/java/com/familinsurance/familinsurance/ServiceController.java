@@ -18,6 +18,12 @@ public class ServiceController {
     
     @GetMapping("/Services")
     List<Service> getServices(){
+        List<Service> servicelist = new ArrayList<>();
+        Service service1 = new Service();
+        service1.id=1;
+        service1.name= "Aseguradora";
+        service1.description= "Control de seguros";
+        service1.image= 
         return null; 
     }
    
