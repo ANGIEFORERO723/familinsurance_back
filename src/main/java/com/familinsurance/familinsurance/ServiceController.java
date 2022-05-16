@@ -1,38 +1,37 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.familinsurance.familinsurance;
 
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
-/**
- *
- * @author BIBI
- */
- 
+@CrossOrigin("*")
 @RestController
 public class ServiceController {
-    
-    @GetMapping("/Services")
-    List<Service> getServices(){
-        List<Service> servicelist = new ArrayList<>();
-        Service service1 = new Service();
-        service1.id=1;
-        service1.name= "Aseguradora";
-        service1.description= "Control de seguros";
-        service1.image= 
-        return null; 
+
+    @Autowired
+    private ServiceRepository serviceRepository;
+
+    @GetMapping("/")
+    public @ResponseBody Iterable<Service> getServices() {
+        return serviceRepository.findAll();
     }
-   
-@GetMapping("/")
-String getHello(){
-   return ("Hello world") ;
 
- } 
- }
-    
-    
+    @PostMapping(value = "/")
+    public @ResponseBody String addNewUser(@RequestBody ServiceDto serviceDto) {
+        // @ResponseBody means the returned String is the response, not a view name
+        // @RequestParam means it is a parameter from the GET or POST request
+        Service service = new Service();
 
+        service.Nombre = serviceDto.Nombre;
+        service.Descripcion = serviceDto.Descripcion;
+        service.Imagen = serviceDto.Imagen;
+        service.Categoria = serviceDto.Categoria;
+        serviceRepository.save(service);
+        return "Saved";
+    }
+}
