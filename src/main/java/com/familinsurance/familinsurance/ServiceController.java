@@ -35,4 +35,25 @@ public class ServiceController {
         serviceRepository.save(service);
         return "Saved";
     }
+    
+    @PostMapping(value = "/newsletter")
+    public @ResponseBody responseDTO addNewsLetter(@RequestBody UserDto userDto) {
+        // @ResponseBody means the returned String is the response, not a view name
+        // @RequestParam means it is a parameter from the GET or POST request
+        System.out.println(userDto.email);
+        System.out.println(userDto.name);
+        /*
+        Service service = new Service();
+
+        service.Nombre = serviceDto.Nombre;
+        service.Descripcion = serviceDto.Descripcion;
+        service.Imagen = serviceDto.Imagen;
+        service.Categoria = serviceDto.Categoria;
+        serviceRepository.save(service);
+        */
+        responseDTO responseDto_ = new responseDTO();
+        responseDto_.state=true;
+        responseDto_.message="Datos recibidos correctamente";
+        return responseDto_;
+    }
 }
