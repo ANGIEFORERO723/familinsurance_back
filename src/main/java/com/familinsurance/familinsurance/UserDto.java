@@ -9,7 +9,7 @@ package com.familinsurance.familinsurance;
  * @author Andres
  */
 public class UserDto {
-    
+    public Integer id_usuario;
     public String name;
     public String email;
     

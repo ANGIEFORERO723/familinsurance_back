@@ -45,10 +45,9 @@ public class ServiceController {
         /*
         Service service = new Service();
 
-        service.Nombre = serviceDto.Nombre;
-        service.Descripcion = serviceDto.Descripcion;
-        service.Imagen = serviceDto.Imagen;
-        service.Categoria = serviceDto.Categoria;
+        service.id_usuario = UserDto.id_usuario;
+        service.nombre = UserDto.nombre;
+        service.email = UserDto.email;
         serviceRepository.save(service);
         */
         responseDTO responseDto_ = new responseDTO();
