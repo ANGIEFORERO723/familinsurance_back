@@ -10,7 +10,7 @@ package com.familinsurance.familinsurance;
  */
 public class UserDto {
     public Integer id_usuario;
-    public String name;
+    public String nombre;
     public String email;
     
 }
