@@ -17,6 +17,10 @@ public class ServiceController {
     @Autowired
     private ServiceRepository serviceRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
+
     @GetMapping("/")
     public @ResponseBody Iterable<Service> getServices() {
         return serviceRepository.findAll();
@@ -41,16 +45,15 @@ public class ServiceController {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
         System.out.println(userDto.email);
-        System.out.println(userDto.name);
-        /*
-        Service service = new Service();
+        System.out.println(userDto.nombre);
+        
+        User user = new User();
 
-        service.Nombre = serviceDto.Nombre;
-        service.Descripcion = serviceDto.Descripcion;
-        service.Imagen = serviceDto.Imagen;
-        service.Categoria = serviceDto.Categoria;
-        serviceRepository.save(service);
-        */
+        user.id_usuario = userDto.id_usuario;
+        user.nombre = userDto.nombre;
+        user.email = userDto.email;
+        userRepository.save(user);
+        
         responseDTO responseDto_ = new responseDTO();
         responseDto_.state=true;
         responseDto_.message="Datos recibidos correctamente";
