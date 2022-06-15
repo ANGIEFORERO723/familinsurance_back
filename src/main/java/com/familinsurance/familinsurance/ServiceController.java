@@ -2,6 +2,9 @@
 package com.familinsurance.familinsurance;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,8 +43,11 @@ public class ServiceController {
         return "Saved";
     }
     
-    @PostMapping(value = "/newsletter")
-    public @ResponseBody responseDTO addNewsLetter(@RequestBody UserDto userDto) {
+    
+    @PostMapping(value = "/newsletter",
+    produces = {MediaType.APPLICATION_JSON_VALUE}
+    )
+    public ResponseEntity<responseDTO> addNewsLetter(@RequestBody UserDto userDto) {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
         System.out.println(userDto.email);
@@ -57,6 +63,6 @@ public class ServiceController {
         responseDTO responseDto_ = new responseDTO();
         responseDto_.state=true;
         responseDto_.message="Datos recibidos correctamente";
-        return responseDto_;
+        return new ResponseEntity<responseDTO>(responseDto_,HttpStatus.ACCEPTED);
     }
 }
