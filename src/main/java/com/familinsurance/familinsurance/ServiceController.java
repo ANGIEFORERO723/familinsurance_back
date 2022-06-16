@@ -44,19 +44,29 @@ public class ServiceController {
     public @ResponseBody responseDTO addNewsLetter(@RequestBody UserDto userDto) {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
-        System.out.println(userDto.email);
-        System.out.println(userDto.nombre);
-        
-        User user = new User();
+        if(userDto.email.contains("@")){
+            System.out.println(userDto.email);
+            System.out.println(userDto.nombre);
+            
+            User user = new User();
+    
+            user.id_usuario = userDto.id_usuario;
+            user.nombre = userDto.nombre;
+            user.email = userDto.email;
+            userRepository.save(user);
+            
+            responseDTO responseDto_ = new responseDTO();
+            responseDto_.state=true;
+            responseDto_.message="Datos recibidos correctamente";
+            return responseDto_;
 
-        user.id_usuario = userDto.id_usuario;
-        user.nombre = userDto.nombre;
-        user.email = userDto.email;
-        userRepository.save(user);
-        
-        responseDTO responseDto_ = new responseDTO();
-        responseDto_.state=true;
-        responseDto_.message="Datos recibidos correctamente";
-        return responseDto_;
+        }else{
+            responseDTO responseDto_ = new responseDTO();
+            responseDto_.state=true;
+            responseDto_.message="No se recibio el email valido";
+            return responseDto_;
+
+        }
+      
     }
 }
